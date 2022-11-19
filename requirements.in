@@ -1,0 +1,16 @@
+imgaug
+ipykernel
+folium
+timm
+torch
+torchvision
+numpy
+mapclassify
+matplotlib 
+tqdm
+tensorboard
+geopandas
+opencv-python
+pandas
+seaborn
+transformers
