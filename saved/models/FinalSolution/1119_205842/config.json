@@ -1,0 +1,82 @@
+{
+    "name": "FinalSolution",
+    "n_gpu": 1,
+    "arch": {
+        "type": "TimmEfficientNetB0",
+        "args": {
+            "n_classes": 3
+        }
+    },
+    "train_dataset": {
+        "type": "ZeroDeforestationDataset",
+        "args": {
+            "csv_file": "/home/agarcia/repos/ZeroDef/zero_deforestation/temp/extended_data.csv",
+            "image_size": [
+                224,
+                224
+            ]
+        }
+    },
+    "val_dataset": {
+        "type": "ZeroDeforestationDataset",
+        "args": {
+            "csv_file": "/home/agarcia/repos/ZeroDef/zero_deforestation/temp/extended_data.csv",
+            "image_size": [
+                224,
+                224
+            ]
+        }
+    },
+    "train_aug": {
+        "type": "ImgAugTransform",
+        "args": {}
+    },
+    "val_aug": {
+        "type": "ImgAugTransform",
+        "args": {}
+    },
+    "train_data_loader": {
+        "type": "ZeroDeforestationDataLoader",
+        "args": {
+            "batch_size": 64,
+            "shuffle": true,
+            "nworkers": 0
+        }
+    },
+    "val_data_loader": {
+        "type": "ZeroDeforestationDataLoader",
+        "args": {
+            "batch_size": 64,
+            "shuffle": false,
+            "nworkers": 0
+        }
+    },
+    "optimizer": {
+        "type": "Adam",
+        "args": {
+            "lr": 1e-05,
+            "weight_decay": 0,
+            "amsgrad": true
+        }
+    },
+    "loss": "cross_entropy_loss",
+    "metrics": [
+        "f1_score_metric"
+    ],
+    "lr_scheduler": {
+        "type": "StepLR",
+        "args": {
+            "step_size": 40,
+            "gamma": 0.1
+        }
+    },
+    "trainer": {
+        "epochs": 100,
+        "save_dir": "saved/",
+        "save_period": 1,
+        "verbosity": 2,
+        "monitor": "min val_loss",
+        "early_stop": 10,
+        "tensorboard": true
+    }
+}

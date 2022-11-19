@@ -1,16 +1,15 @@
-```
-make download-data
-```
+# ZeroDef
 
-```
-make create-extended-dataset
-```
+To set up the environment, you can do the following (warning: you need to install
+`tox` library):
 
-```
-make split-dataset DATASET=/home/agarcia/repos/ZeroDef/zero_deforestation/temp/extended_data.csv TRAIN_PROPORTION=0.9
-PYTHONPATH=. python zero_deforestation/scripts/split_train_val.py /home/agarcia/repos/ZeroDef/zero_deforestation/temp/extended_data.csv 0.9
-```
+- `make env-create`
+- `source .tox/zero_deforestation/bin/activate`
 
-```
-PYTHONPATH=. python zero_deforestation/train.py --c zero_deforestation/final_solution_config.json
-```
+To replicate the solution/train the model, you can do the following:
+
+- `python main.py train_solution`
+
+Alternatively, to obtain the solution, you can do the following:
+
+- `python main.py obtain_predictions`

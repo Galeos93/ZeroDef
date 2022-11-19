@@ -9,7 +9,6 @@ mapclassify
 matplotlib 
 tqdm
 tensorboard
-geopandas
 opencv-python
 pandas
 seaborn
