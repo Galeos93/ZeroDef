@@ -10,7 +10,7 @@
     "train_dataset": {
         "type": "ZeroDeforestationDataset",
         "args": {
-            "csv_file": "zero_deforestation/temp/extended_data.csv",
+            "csv_file": "zero_deforestation/data/extended_data.csv",
             "image_size": [
                 224,
                 224
@@ -20,7 +20,7 @@
     "val_dataset": {
         "type": "ZeroDeforestationDataset",
         "args": {
-            "csv_file": "zero_deforestation/temp/extended_data.csv",
+            "csv_file": "zero_deforestation/data/extended_data.csv",
             "image_size": [
                 224,
                 224

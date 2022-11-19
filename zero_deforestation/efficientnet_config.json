@@ -10,7 +10,7 @@
     "train_dataset": {
         "type": "ZeroDeforestationDataset",
         "args": {
-            "csv_file": "/home/agarcia/repos/ZeroDef/zero_deforestation/temp/extended_data_train_split.csv",
+            "csv_file": "/home/agarcia/repos/ZeroDef/zero_deforestation/data/extended_data_train_split.csv",
             "image_size": [
                 224,
                 224
@@ -20,7 +20,7 @@
     "val_dataset": {
         "type": "ZeroDeforestationDataset",
         "args": {
-            "csv_file": "/home/agarcia/repos/ZeroDef/zero_deforestation/temp/extended_data_val_split.csv",
+            "csv_file": "/home/agarcia/repos/ZeroDef/zero_deforestation/data/extended_data_val_split.csv",
             "image_size": [
                 224,
                 224

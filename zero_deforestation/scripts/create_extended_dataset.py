@@ -19,9 +19,7 @@ FORESTNET_FIELD_MAPPER = {
 
 
 def main():
-    zero_deforestation_train_df = pd.read_csv(
-        DATA_PATH / "/home/agarcia/repos/ZeroDef/zero_deforestation/data/train.csv"
-    )
+    zero_deforestation_train_df = pd.read_csv(DATA_PATH / "train.csv")
 
     forestnet_train_df = pd.read_csv(
         DATA_PATH / "ForestNetDataset/deep/downloads/ForestNetDataset/train.csv"
@@ -52,7 +50,7 @@ def main():
     ).drop_duplicates(subset=["label", "latitude", "longitude", "year"])
 
     extended_df[["label", "latitude", "longitude", "year", "example_path"]].to_csv(
-        "/home/agarcia/repos/ZeroDef/zero_deforestation/temp/extended_data.csv",
+        str(DATA_PATH / "extended_data.csv"),
         index=False,
     )
 
