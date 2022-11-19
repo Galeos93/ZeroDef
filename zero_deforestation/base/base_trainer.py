@@ -1,5 +1,7 @@
-import torch
+"""Module with a parent Trainer class."""
 from abc import abstractmethod
+
+import torch
 from numpy import inf
 from zero_deforestation.logger import TensorboardWriter
 
@@ -73,11 +75,13 @@ class BaseTrainer:
             for key, value in log.items():
                 self.logger.info("    {:15s}: {}".format(str(key), value))
 
-            # evaluate model performance according to configured metric, save best checkpoint as model_best
+            # evaluate model performance according to configured metric,
+            # save best checkpoint as model_best
             best = False
             if self.mnt_mode != "off":
                 try:
-                    # check whether model performance improved or not, according to specified metric(mnt_metric)
+                    # check whether model performance improved or not,
+                    # according to specified metric(mnt_metric)
                     improved = (
                         self.mnt_mode == "min" and log[self.mnt_metric] <= self.mnt_best
                     ) or (
@@ -150,8 +154,11 @@ class BaseTrainer:
         # load architecture params from checkpoint.
         if checkpoint["config"]["arch"] != self.config["arch"]:
             self.logger.warning(
-                "Warning: Architecture configuration given in config file is different from that of "
-                "checkpoint. This may yield an exception while state_dict is being loaded."
+                (
+                    "Warning: Architecture configuration given in config file "
+                    "is different from that of checkpoint. This may yield an "
+                    "exception while state_dict is being loaded."
+                )
             )
         self.model.load_state_dict(checkpoint["state_dict"])
 
@@ -161,8 +168,8 @@ class BaseTrainer:
             != self.config["optimizer"]["type"]
         ):
             self.logger.warning(
-                "Warning: Optimizer type given in config file is different from that of checkpoint. "
-                "Optimizer parameters not being resumed."
+                "Warning: Optimizer type given in config file is different "
+                "from that of checkpoint. Optimizer parameters not being resumed."
             )
         else:
             self.optimizer.load_state_dict(checkpoint["optimizer"])

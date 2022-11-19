@@ -1,3 +1,4 @@
+from zero_deforestation.dataset import ZeroDeforestationDataset
 from zero_deforestation.data_loader import data_loaders, augmentations
 from zero_deforestation.model import model
 
@@ -14,7 +15,7 @@ class TestCNNModel:
 
         transformation = augmentations.ImgAugTransform(train=True)
 
-        dataset = data_loaders.ZeroDeforestationDataset(
+        dataset = ZeroDeforestationDataset(
             str(zero_deforestation_train_df_path),
             image_size=image_size,
             return_label=True,

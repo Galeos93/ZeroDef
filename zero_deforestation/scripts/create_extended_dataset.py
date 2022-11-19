@@ -1,5 +1,10 @@
-import pandas as pd
+"""Script to obtain a dataset that mixes the one from the ZeroDeforestation Challenge
+and the ForestNet one.
+"""
+
 import pathlib
+
+import pandas as pd
 
 from zero_deforestation import data
 

@@ -1,11 +1,9 @@
-import os
+"""Module that contains the datasets."""
 import pathlib
 
-import numpy as np
 import cv2
 import pandas as pd
 from torch.utils.data import Dataset
-import torch
 
 from zero_deforestation import data
 
@@ -49,6 +47,4 @@ class ZeroDeforestationDataset(Dataset):
         if self.return_label:
             label = self.df.loc[idx, "label"]
             sample["target"] = int(label)
-            return sample
-        else:
-            return sample
+        return sample

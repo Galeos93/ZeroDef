@@ -8,7 +8,7 @@ test:
 	pytest tests
 
 lint:
-	pylint zero_deforestation
+	pylint --rcfile zero_deforestation/.pylintrc zero_deforestation
 
 download-data:
 	cd zero_deforestation/temp && \

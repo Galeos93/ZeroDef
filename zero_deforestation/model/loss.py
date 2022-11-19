@@ -1,3 +1,4 @@
+"""Module that contains various losses."""
 import torch.nn.functional as F
 from torch import nn
 

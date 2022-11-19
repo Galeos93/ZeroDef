@@ -1,10 +1,14 @@
-import timm
+"""Module that contains various models' architectures."""
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
+import timm
+
 
 class CNNModel(nn.Module):
+    """Custom CNN model."""
+
     def __init__(self, n_classes):
         super().__init__()
         self.conv1 = nn.Conv2d(3, 6, 5)
@@ -25,6 +29,8 @@ class CNNModel(nn.Module):
 
 
 class TimmResNetV2(nn.Module):
+    """ResNet V2 50 model from `timm` module"""
+
     def __init__(
         self,
         n_classes=5,
@@ -44,6 +50,8 @@ class TimmResNetV2(nn.Module):
 
 
 class TimmEfficientNetB4(nn.Module):
+    """EfficientNetB4 model from `timm` module"""
+
     def __init__(
         self,
         n_classes=5,
@@ -63,6 +71,8 @@ class TimmEfficientNetB4(nn.Module):
 
 
 class TimmEfficientNetB0(nn.Module):
+    """EfficientNetB0 model from `timm` module"""
+
     def __init__(
         self,
         n_classes=5,

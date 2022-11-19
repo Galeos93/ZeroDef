@@ -1,3 +1,4 @@
+"""Script to split a CSV database into train and validation sets."""
 import pathlib
 import sys
 

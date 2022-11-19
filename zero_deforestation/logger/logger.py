@@ -1,3 +1,5 @@
+"""Module with logger methods."""
+
 import logging
 import logging.config
 from pathlib import Path

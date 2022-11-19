@@ -1,15 +1,18 @@
-import numpy as np
+"""Module with data augmentators."""
+
 import torchvision.transforms as T
-from imgaug import augmenters as iaa
 
 
 class ImgAugTransform:
+    """Preprocessing that standardizes an image and converts it to a torch.Tensor."""
+
     def __init__(self, train):
         self.train = train
 
         self.transform = self.build_transforms()
 
-    def build_transforms(self):
+    @staticmethod
+    def build_transforms():
 
         transformations = [
             T.ToTensor(),

@@ -1,7 +1,9 @@
+"""Module that contains the trainer for the solution."""
+
 import numpy as np
 import torch
 from torchvision.utils import make_grid
-from base import BaseTrainer
+from base import BaseTrainer  # pylint: disable=no-name-in-module
 from utils import inf_loop, MetricTracker
 
 

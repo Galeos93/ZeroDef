@@ -1,4 +1,5 @@
-from torch.nn.utils.rnn import pad_sequence
+"""Module with torch DataLoaders."""
+
 from torch.utils.data.dataloader import DataLoader
 
 
