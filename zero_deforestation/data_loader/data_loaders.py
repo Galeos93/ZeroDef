@@ -1,8 +1,6 @@
 from torch.nn.utils.rnn import pad_sequence
 from torch.utils.data.dataloader import DataLoader
 
-from zero_deforestation.dataset import ZeroDeforestationDataset
-
 
 class ZeroDeforestationDataLoader(DataLoader):
     """Data Loader for Zero Deforestation challenge data."""
