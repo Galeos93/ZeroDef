@@ -11,7 +11,7 @@ lint:
 	pylint --rcfile zero_deforestation/.pylintrc zero_deforestation
 
 download-data:
-	cd zero_deforestation/temp && \
+	cd zero_deforestation/data && \
 	wget -q https://challenges-asset-files.s3.us-east-2.amazonaws.com/data_sets/Data-Science/4+-+events/SchneiderElectricEuropeanHackathon22/train.csv && \
 	wget -q https://challenges-asset-files.s3.us-east-2.amazonaws.com/data_sets/Data-Science/4+-+events/SchneiderElectricEuropeanHackathon22/test.csv && \
 	wget -q https://challenges-asset-files.s3.us-east-2.amazonaws.com/data_sets/Data-Science/4+-+events/SchneiderElectricEuropeanHackathon22/train_test_data.zip && \

@@ -1,8 +1,13 @@
 """Module to obtain test inferences for the Zero Deforestation challenge."""
 
 import argparse
+import json
+
+import numpy as np
 import torch
+import torch.nn.functional as F
 from tqdm import tqdm
+
 import zero_deforestation.dataset as module_data
 import zero_deforestation.data_loader.data_loaders as module_dataloader
 import zero_deforestation.data_loader.augmentations as module_augmentations
@@ -16,25 +21,19 @@ def main(config):
     logger = config.get_logger("test")
 
     # set data augmentation
-    aug = config.init_obj("train_aug", module_augmentations, train=False)
+    aug = config.init_obj("aug", module_augmentations, train=False)
 
     # setup dataset instances
-    dataset = config.init_obj(
-        "train_dataset", module_data, transform=aug, return_label=True
-    )
+    dataset = config.init_obj("dataset", module_data, transform=aug, return_label=False)
 
     # setup data_loader instances
     data_loader = config.init_obj(
-        "train_data_loader", module_dataloader, dataset=dataset, sampler=None
+        "data_loader", module_dataloader, dataset=dataset, sampler=None
     )
 
     # build model architecture
     model = config.init_obj("arch", module_arch)
     logger.info(model)
-
-    # get function handles of loss and metrics
-    loss_fn = getattr(module_loss, config["loss"])
-    metric_fns = [getattr(module_metric, met) for met in config["metrics"]]
 
     logger.info("Loading checkpoint: {} ...".format(config.resume))
     checkpoint = torch.load(config.resume)
@@ -48,34 +47,22 @@ def main(config):
     model = model.to(device)
     model.eval()
 
-    total_loss = 0.0
-    total_metrics = torch.zeros(len(metric_fns))
-
     model_outputs = []
 
     with torch.no_grad():
-        for _, (data, target) in enumerate(tqdm(data_loader)):
-            data, target = data.to(device), target.to(device)
-            output = model(data)
+        for _, (data) in enumerate(tqdm(data_loader)):
+            images = data["image"]
+            images = images.to(device)
+            output = model(images)
+            output = F.softmax(output, dim=1)
+            output = torch.argmax(output, dim=1)
 
-            model_outputs.append(output)
+            model_outputs.append(output.cpu().detach().numpy())
 
-            # computing loss, metrics on test set
-            loss = loss_fn(output, target)
-            batch_size = data.shape[0]
-            total_loss += loss.item() * batch_size
-            for index_2, metric in enumerate(metric_fns):
-                total_metrics[index_2] += metric(output, target) * batch_size
-
-    n_samples = len(data_loader.sampler)
-    log = {"loss": total_loss / n_samples}
-    log.update(
-        {
-            met.__name__: total_metrics[i].item() / n_samples
-            for i, met in enumerate(metric_fns)
-        }
-    )
-    logger.info(log)
+    concat_output = np.concatenate(model_outputs)
+    output = {"target": {str(idx): int(x) for idx, x in enumerate(concat_output)}}
+    with open("predictions.json", "w") as f_hdl:
+        json.dump(output, f_hdl)
 
 
 if __name__ == "__main__":
