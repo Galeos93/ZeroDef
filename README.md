@@ -1,7 +1,7 @@
 # ZeroDef
 
 To set up the environment, you can do the following (warning: you need to install
-`tox` library):
+`tox` and `virtualenv` library):
 
 - `make env-create`
 - `source .tox/zero_deforestation/bin/activate`

@@ -62,7 +62,7 @@ def main(config):
     concat_output = np.concatenate(model_outputs)
     output = {"target": {str(idx): int(x) for idx, x in enumerate(concat_output)}}
     with open("predictions.json", "w") as f_hdl:
-        json.dump(output, f_hdl)
+        json.dump(output, f_hdl, indent=2)
 
 
 if __name__ == "__main__":
